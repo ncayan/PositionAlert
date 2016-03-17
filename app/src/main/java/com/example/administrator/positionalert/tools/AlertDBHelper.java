@@ -15,7 +15,7 @@ public class AlertDBHelper extends SQLiteOpenHelper {
             + "latitude real, "
             + "longitude real, "
             + "range real"
-            + "on integer)";
+            + "ison integer)";
 
     private Context mContext;
 
@@ -34,6 +34,9 @@ public class AlertDBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+        db.execSQL("drop table if exists Book");
+        db.execSQL("drop table if exists alert");
+        onCreate(db);
     }
 
 

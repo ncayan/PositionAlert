@@ -3,6 +3,7 @@ package com.example.administrator.positionalert.tools;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.administrator.positionalert.MainActivity;
 import com.example.administrator.positionalert.model.AlertItem;
@@ -40,9 +41,14 @@ public class DBController {
         values.put("latitude", alertItem.getLatitude());
         values.put("longitude", alertItem.getLongitude());
         values.put("range", alertItem.getRange());
-        values.put("on", (alertItem.isOn() ? 1 : 0));
-        db.insert("Alert", null, values); // 插入第一条数据
-        values.clear();
+        values.put("ison", (alertItem.isOn() ? 1 : 0));
+        try {
+            db.insert("Alert", null, values); // 插入第一条数据
+            values.clear();
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("DB:", "DBInsert: "+e.toString() );
+        }
     }
 
     public static void DBUPdate(AlertDBHelper alertDBHelper,AlertItem alertItem){

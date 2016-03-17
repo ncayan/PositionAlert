@@ -40,6 +40,17 @@ public class AlertItem {
         DBController.DBInsert(MainActivity.alertDBHelper, this);
     }
 
+    public AlertItem(String name,double latitude,double longitude,double range,boolean on){
+        this.id="";
+        this.name=name;
+        this.latitude=latitude;
+        this.longitude=longitude;
+        this.range=range;
+        this.on=on;
+        alertRing.add(this);
+        DBController.DBInsert(MainActivity.alertDBHelper, this);
+    }
+
     public static void clearRing(){
         alertRing.clear();
     }

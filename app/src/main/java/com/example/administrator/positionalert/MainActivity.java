@@ -1,6 +1,8 @@
 package com.example.administrator.positionalert;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Geocoder;
 import android.location.Location;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 import com.example.administrator.positionalert.model.AlertItem;
 import com.example.administrator.positionalert.tools.AlertAdapter;
 import com.example.administrator.positionalert.tools.AlertDBHelper;
+import com.example.administrator.positionalert.ui.AddAlertActivity;
 
 import java.util.List;
 import java.util.Locale;
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        alertDBHelper=new AlertDBHelper(this,"PositionAlert.db",null,1);
+        alertDBHelper=new AlertDBHelper(this,"PositionAlert.db",null,4);
 
         AlertItem.refreshRing();
         alertListInit();
@@ -61,11 +64,18 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+                Intent intent=new Intent(MainActivity.this, AddAlertActivity.class);
+                startActivity(intent);
+
             }
         });
         getCurrentPosition();
+    }
+
+    void proximityAlert(){
+
     }
 
 
@@ -136,8 +146,12 @@ public class MainActivity extends AppCompatActivity {
         location=locationManager.getLastKnownLocation(provider);
         if(location!=null){
 
-            Toast.makeText(this,"当前位置"+location.getLatitude()+"+"+location.getLongitude(),Toast.LENGTH_SHORT);
-            textView.setText("当前位置"+location.getLatitude()+"+"+location.getLongitude());
+            Toast.makeText(this, "当前位置" + location.getLatitude() + "+" + location.getLongitude(), Toast.LENGTH_SHORT);
+            textView.setText("当前位置" + location.getLatitude() + "+" + location.getLongitude());
+
+            Intent intent=new Intent(this,AddAlertActivity.class);
+            PendingIntent pendingIntent=PendingIntent.getBroadcast(this,-1,intent,0);
+            locationManager.addProximityAlert(location.getLatitude(),location.getLongitude(),10f,-1,pendingIntent);
         }
         locationManager.requestLocationUpdates(provider,5000,1,locationListener);
     }
@@ -147,6 +161,9 @@ public class MainActivity extends AppCompatActivity {
         public void onLocationChanged(Location location) {
             Toast.makeText(MainActivity.this,"刷新位置"+location.getLatitude()+"+"+location.getLongitude(),Toast.LENGTH_SHORT);
             textView.setText("刷新位置"+location.getLatitude()+"+"+location.getLongitude()+AutoAddress());
+            Intent intent=new Intent(MainActivity.this,AddAlertActivity.class);
+            PendingIntent pendingIntent=PendingIntent.getBroadcast(MainActivity.this,-1,intent,0);
+            locationManager.addProximityAlert(location.getLatitude(), location.getLongitude(), 10f, -1, pendingIntent);
         }
 
         @Override
