@@ -15,12 +15,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.positionalert.MainActivity;
 import com.example.administrator.positionalert.R;
 import com.example.administrator.positionalert.model.AlertItem;
+import com.example.administrator.positionalert.tools.DBController;
 
 import java.util.List;
 
 /**
+ * 创建新的地点闹铃的 Activity
  * Created by Administrator on 2016/3/16.
  */
 public class AddAlertActivity extends Activity {
@@ -64,14 +67,22 @@ public class AddAlertActivity extends Activity {
         Log.d("add", "onCreate: addActivity");
     }
 
-
+    /**
+     * 保存新闹铃
+     */
     void saveAlert(){
         if(alertName.getText().toString().equals("")||alertRange.getText().toString().equals("")){
+            //如果名称和范围为空
             //不成功
         }else {
             String name = alertName.getText().toString();
             double range=Double.valueOf(alertRange.getText().toString());
+
+            //根据输入 创建新闹铃实例
             AlertItem alertItem = new AlertItem(name,lati,longi,range,true);
+
+            DBController.DBInsert(alertItem);
+            //刷新 闹铃集合
             AlertItem.refreshRing();
         }
     }

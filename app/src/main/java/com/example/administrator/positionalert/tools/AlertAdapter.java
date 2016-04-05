@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -32,7 +33,7 @@ public class AlertAdapter extends ArrayAdapter<AlertItem> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        AlertItem alertItem=getItem(position);
+        final AlertItem alertItem=getItem(position);
         View view= LayoutInflater.from(getContext()).inflate(resourceId, null);
         TextView itemName=(TextView)view.findViewById(R.id.alert_item_name);
         TextView itemRange=(TextView)view.findViewById(R.id.alert_item_range);
@@ -41,6 +42,20 @@ public class AlertAdapter extends ArrayAdapter<AlertItem> {
         itemName.setText(alertItem.getName());
         itemRange.setText(""+alertItem.getRange());
         on.setChecked(alertItem.isOn());
+        on.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (alertItem.isOn()) {
+                    alertItem.setOn(false);
+                } else {
+                    alertItem.setOn(true);
+                }
+
+                DBController.DBUPdate(alertItem);
+                AlertItem.refreshRing();
+                mProximityAlert.refreshRing(getContext());
+            }
+        });
         return view;
     }
 }

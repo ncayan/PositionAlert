@@ -23,6 +23,8 @@
             android:label="AddAlert"
             android:theme="@style/Theme.AppCompat.Dialog"
             ></activity>
+        <service android:name=".tools.alertLocationService" />
+        <receiver android:name=".action.ProximityAlertReciver"/>
     </application>
 
 
