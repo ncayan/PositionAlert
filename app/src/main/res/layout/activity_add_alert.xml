@@ -5,31 +5,48 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="当前维度"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/add_alert_long"
         android:text="经度"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="当前经度"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/add_alert_lat"
         android:text="纬度"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="闹铃名称"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/add_alert_name"
-        android:text="name"/>
+        android:text="闹铃名称"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="闹铃范围"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:text="123.9"
+        android:text="1"
         android:id="@+id/add_alert_range" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/add_alert_addConfirm_bt"/>
+        android:id="@+id/add_alert_addConfirm_bt"
+        android:text="添加新闹铃"/>
 
 
 </LinearLayout>

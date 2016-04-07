@@ -1,4 +1,4 @@
-package com.example.administrator.positionalert.tools;
+package com.example.administrator.positionalert.Controller;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -99,13 +99,13 @@ public class DBController {
     public static void DBUPdate(AlertItem alertItem){
         SQLiteDatabase db = mhelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        String name=alertItem.getName();
-        values.put("name", name);
+        String id=alertItem.getId();
+        values.put("name", alertItem.getName());
         values.put("latitude", alertItem.getLatitude());
         values.put("longitude", alertItem.getLongitude());
         values.put("range", alertItem.getRange());
         values.put("ison", (alertItem.isOn() ? 1 : 0));
-        db.update("Alert2", values, "name = ?", new String[]{name});
+        db.update("Alert2", values, "name = ?", new String[]{id});
     }
 
     /**
@@ -117,6 +117,12 @@ public class DBController {
         SQLiteDatabase db = alertDBHelper.getWritableDatabase();
         String name=alertItem.getName();
         db.delete("Alert2", "name = ?", new String[]{name});
+    }
+
+    public static void DBDelete(AlertItem alertItem){
+        SQLiteDatabase db = mhelper.getWritableDatabase();
+        String id=alertItem.getId();
+        db.delete("Alert2", "id = ?", new String[]{id});
     }
 
     /**

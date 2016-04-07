@@ -1,8 +1,7 @@
 package com.example.administrator.positionalert.model;
 
 import com.example.administrator.positionalert.MainActivity;
-import com.example.administrator.positionalert.tools.AlertDBHelper;
-import com.example.administrator.positionalert.tools.DBController;
+import com.example.administrator.positionalert.Controller.DBController;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,6 +58,16 @@ public class AlertItem {
         //DBController.DBInsert(MainActivity.alertDBHelper, this);
     }
 
+    public static void deleteItem(AlertItem alertItem){
+        DBController.DBDelete(alertItem);
+        refreshRing();
+    }
+
+    public static void updateItem(AlertItem alertItem){
+        DBController.DBUPdate(alertItem);
+        refreshRing();
+    }
+
     public static void clearRing(){
         alertRing.clear();
         Ring.clear();
@@ -74,7 +83,6 @@ public class AlertItem {
         Iterator it = Ring.keySet().iterator();
         while (it.hasNext()) {
             String key = it.next().toString();
-            alertRing.clear();
             alertRing.add(Ring.get(key));
         }
     }
@@ -116,12 +124,6 @@ public class AlertItem {
     }
 
     public static List<AlertItem> getAlertRing() {
-        Iterator it = Ring.keySet().iterator();
-        while (it.hasNext()) {
-            String key = it.next().toString();
-            alertRing.clear();
-            alertRing.add(Ring.get(key));
-        }
         return alertRing;
     }
 

@@ -35,12 +35,18 @@
         android:layout_height="match_parent">
 
         <Switch
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text=""
             android:id="@+id/alert_item_switch"
             android:layout_gravity="right"
             android:layout_weight="4" />
+
+        <Button
+            android:text="d"
+            android:id="@+id/alert_item_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 
 

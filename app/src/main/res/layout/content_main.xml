@@ -13,6 +13,12 @@
     tools:showIn="@layout/activity_main">
 
     <TextView
+        android:id="@+id/blackRoom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello World!" />
+
+    <TextView
         android:id="@+id/hellow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -7,7 +7,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,10 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.administrator.positionalert.MainActivity;
 import com.example.administrator.positionalert.R;
 import com.example.administrator.positionalert.model.AlertItem;
-import com.example.administrator.positionalert.tools.DBController;
+import com.example.administrator.positionalert.Controller.DBController;
 
 import java.util.List;
 

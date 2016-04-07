@@ -1,4 +1,4 @@
-package com.example.administrator.positionalert.tools;
+package com.example.administrator.positionalert.Controller;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

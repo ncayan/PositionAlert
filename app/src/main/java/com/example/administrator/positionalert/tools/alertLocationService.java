@@ -23,6 +23,7 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.administrator.positionalert.Controller.AlertNotificationController;
 import com.example.administrator.positionalert.MainActivity;
 import com.example.administrator.positionalert.R;
 import com.example.administrator.positionalert.model.AlertItem;
@@ -51,7 +52,7 @@ public class alertLocationService extends Service {
     public class AlertBinder extends Binder{
         public void refreshRing(){
             AlertItem.refreshRing();
-            Ring.clear();
+            clearRing();
             for(AlertItem alertItem:AlertItem.alertRing){
                 addProximityAlert(alertItem);
             }
@@ -154,7 +155,7 @@ public class alertLocationService extends Service {
     public void onDestroy() {
         super.onDestroy();
         if (Ring != null){
-            Ring.clear();
+            clearRing();
         }
         if (locationManager != null) {
             locationManager.removeUpdates(locationListener);
@@ -164,9 +165,11 @@ public class alertLocationService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         //老的构造方法已经不推荐使用（话说这书有多老了）
         //Notification notification = new Notification(R.mipmap.ic_launcher,"Notification comes", System.currentTimeMillis());
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        /*Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
                 notificationIntent, 0);
         //API 16 之后开始用Bulider 现在都 23 了是不是又换了？
@@ -178,9 +181,11 @@ public class alertLocationService extends Service {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setWhen(System.currentTimeMillis())
                 .build();
-        //
+        //*/
+        Notification notification = AlertNotificationController.getNotification();
         //notification.setLatestEventInfo(this, Globle.appName, Globle.MONITOR_ONLINE, pendingIntent);
         startForeground(1, notification);
+
     }
 
     @Override
@@ -193,10 +198,11 @@ public class alertLocationService extends Service {
 
     public void addProximityAlert(AlertItem alertItem) {
         String id = alertItem.getId();
+        int intId = Integer.parseInt(id);
         Intent intent = new Intent(Globle.ALERT_RECIVER);
         intent.putExtra("alertId",id);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(alertLocationService.this, Integer.getInteger(id), intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(alertLocationService.this, intId, intent, 0);
         if (ActivityCompat.checkSelfPermission(alertLocationService.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -220,9 +226,17 @@ public class alertLocationService extends Service {
         }
     }
 
+    void clearRing(){
+        /*PendingIntent[] ls =(PendingIntent[]) Ring.values().toArray();
+        for (PendingIntent p:ls){
+            locationManager.removeProximityAlert(p);
+        }*/
+        Ring.clear();
+    }
+
     public void refreshRing(){
         AlertItem.refreshRing();
-        Ring.clear();
+        clearRing();
         for(AlertItem alertItem:AlertItem.alertRing){
             addProximityAlert(alertItem);
         }

@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
@@ -14,7 +13,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Looper;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -26,7 +24,7 @@ import android.widget.Toast;
 
 import com.example.administrator.positionalert.model.AlertItem;
 import com.example.administrator.positionalert.tools.AlertAdapter;
-import com.example.administrator.positionalert.tools.AlertDBHelper;
+import com.example.administrator.positionalert.Controller.AlertDBHelper;
 import com.example.administrator.positionalert.tools.alertLocationService;
 import com.example.administrator.positionalert.ui.AddAlertActivity;
 
@@ -131,6 +129,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         getCurrentPosition();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        alertAdapter.notifyDataSetChanged();
     }
 
     void proximityAlert(){
@@ -300,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
         String add="notFound";
         Geocoder geo=new Geocoder(MainActivity.this,Locale.getDefault());
         try {
-            add=geo.getFromLocation(location.getLatitude(), location.getLongitude(), 1).toString();
+            add=geo.getFromLocation(location.getLatitude(), location.getLongitude(), 1).get(0).getAddressLine(0).toString();
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -32,12 +33,13 @@ public class AlertAdapter extends ArrayAdapter<AlertItem> {
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, final ViewGroup parent) {
         final AlertItem alertItem=getItem(position);
         View view= LayoutInflater.from(getContext()).inflate(resourceId, null);
         TextView itemName=(TextView)view.findViewById(R.id.alert_item_name);
         TextView itemRange=(TextView)view.findViewById(R.id.alert_item_range);
         Switch on=(Switch)view.findViewById(R.id.alert_item_switch);
+        Button delete = (Button)view.findViewById(R.id.alert_item_delete);
 
         itemName.setText(alertItem.getName());
         itemRange.setText(""+alertItem.getRange());
@@ -51,9 +53,14 @@ public class AlertAdapter extends ArrayAdapter<AlertItem> {
                     alertItem.setOn(true);
                 }
 
-                DBController.DBUPdate(alertItem);
-                AlertItem.refreshRing();
+                AlertItem.updateItem(alertItem);
                 mProximityAlert.refreshRing(getContext());
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertItem.deleteItem(alertItem);
             }
         });
         return view;
