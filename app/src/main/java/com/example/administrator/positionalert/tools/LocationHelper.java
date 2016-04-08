@@ -2,7 +2,7 @@ package com.example.administrator.positionalert.tools;
 
 import android.location.Geocoder;
 
-import com.example.administrator.positionalert.MyApplication;
+import com.example.administrator.positionalert.option.MyApplication;
 
 import java.util.Locale;
 

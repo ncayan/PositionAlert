@@ -1,18 +1,15 @@
 package com.example.administrator.positionalert.tools;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.example.administrator.positionalert.MainActivity;
 import com.example.administrator.positionalert.R;
 import com.example.administrator.positionalert.model.AlertItem;
 

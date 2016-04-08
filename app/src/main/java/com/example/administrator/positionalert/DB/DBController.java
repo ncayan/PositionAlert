@@ -1,11 +1,11 @@
-package com.example.administrator.positionalert.Controller;
+package com.example.administrator.positionalert.DB;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.administrator.positionalert.MainActivity;
+import com.example.administrator.positionalert.ui.MainActivity;
 import com.example.administrator.positionalert.model.AlertItem;
 
 import java.util.ArrayList;

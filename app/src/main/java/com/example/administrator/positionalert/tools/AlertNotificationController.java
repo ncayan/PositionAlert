@@ -1,15 +1,14 @@
-package com.example.administrator.positionalert.Controller;
+package com.example.administrator.positionalert.tools;
 
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.administrator.positionalert.MainActivity;
-import com.example.administrator.positionalert.MyApplication;
+import com.example.administrator.positionalert.ui.MainActivity;
+import com.example.administrator.positionalert.option.MyApplication;
 import com.example.administrator.positionalert.R;
-import com.example.administrator.positionalert.model.Globle;
+import com.example.administrator.positionalert.option.Globle;
 
 /**
  * Created by Administrator on 2016/4/7.

@@ -1,7 +1,7 @@
 package com.example.administrator.positionalert.model;
 
-import com.example.administrator.positionalert.MainActivity;
-import com.example.administrator.positionalert.Controller.DBController;
+import com.example.administrator.positionalert.ui.MainActivity;
+import com.example.administrator.positionalert.DB.DBController;
 
 import java.util.ArrayList;
 import java.util.Date;

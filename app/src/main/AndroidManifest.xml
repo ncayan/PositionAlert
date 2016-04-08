@@ -4,14 +4,14 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
-        android:name=".MyApplication"
+        android:name=".option.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,8 +24,15 @@
             android:label="AddAlert"
             android:theme="@style/Theme.AppCompat.Dialog"
             ></activity>
-        <service android:name=".tools.alertLocationService" />
-        <receiver android:name=".action.ProximityAlertReciver"/>
+        <activity android:name=".ui.AlertPenal"
+            android:label="AlertNow"
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
+        <service android:name=".service.alertLocationService" />
+        <receiver android:name=".receiver.ProximityAlertReciver">
+            <intent-filter>
+                <action android:name="com.example.administrator.positionalert.receiver.ProximityAlertReciver"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 

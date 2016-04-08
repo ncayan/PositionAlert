@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.administrator.positionalert.R;
 import com.example.administrator.positionalert.model.AlertItem;
-import com.example.administrator.positionalert.Controller.DBController;
+import com.example.administrator.positionalert.DB.DBController;
 
 import java.util.List;
 

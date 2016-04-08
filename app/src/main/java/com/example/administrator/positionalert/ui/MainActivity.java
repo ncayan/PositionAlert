@@ -1,5 +1,6 @@
-package com.example.administrator.positionalert;
+package com.example.administrator.positionalert.ui;
 
+import android.app.ActivityManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
@@ -22,11 +23,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.positionalert.R;
 import com.example.administrator.positionalert.model.AlertItem;
+import com.example.administrator.positionalert.option.Globle;
+import com.example.administrator.positionalert.option.MyApplication;
 import com.example.administrator.positionalert.tools.AlertAdapter;
-import com.example.administrator.positionalert.Controller.AlertDBHelper;
-import com.example.administrator.positionalert.tools.alertLocationService;
-import com.example.administrator.positionalert.ui.AddAlertActivity;
+import com.example.administrator.positionalert.DB.AlertDBHelper;
+import com.example.administrator.positionalert.service.alertLocationService;
 
 import java.util.List;
 import java.util.Locale;
@@ -111,7 +114,8 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();*/
                 Intent intent=new Intent(MainActivity.this,alertLocationService.class);
                 startService(intent);
-                bindService(intent,connection,BIND_AUTO_CREATE);
+
+                bindService(intent, connection, BIND_AUTO_CREATE);
 
             }
         });
@@ -121,6 +125,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
+                if (!isServiceWork(Globle.ALERT_SERVICE_NAME)){
+                    Toast.makeText(MainActivity.this,"闹铃监控服务未开启",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent=new Intent(MainActivity.this,alertLocationService.class);
                 unbindService(connection);
                 stopService(intent);
@@ -326,5 +334,31 @@ public class MainActivity extends AppCompatActivity {
         alertRing = AlertItem.getAlertRing();
         alertAdapter.notifyDataSetChanged();
 
+    }
+
+    /**
+     * 判断某个服务是否正在运行的方法
+     *
+     * @param serviceName
+     *            是包名+服务的类名（例如：net.loonggg.testbackstage.TestService）
+     * @return true代表正在运行，false代表服务没有正在运行
+     */
+    public boolean isServiceWork(String serviceName) {
+
+        boolean isWork = false;
+        ActivityManager myAM = (ActivityManager) MyApplication.getContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> myList = myAM.getRunningServices(40);
+        if (myList.size() <= 0) {
+            return false;
+        }
+        for (int i = 0; i < myList.size(); i++) {
+            String mName = myList.get(i).service.getClassName().toString();
+            if (mName.equals(serviceName)) {
+                isWork = true;
+                break;
+            }
+        }
+        return isWork;
     }
 }

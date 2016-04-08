@@ -1,17 +1,12 @@
-package com.example.administrator.positionalert.tools;
+package com.example.administrator.positionalert.service;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -20,15 +15,10 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.example.administrator.positionalert.Controller.AlertNotificationController;
-import com.example.administrator.positionalert.MainActivity;
-import com.example.administrator.positionalert.R;
+import com.example.administrator.positionalert.tools.AlertNotificationController;
 import com.example.administrator.positionalert.model.AlertItem;
-import com.example.administrator.positionalert.model.Globle;
-import com.example.administrator.positionalert.ui.AddAlertActivity;
+import com.example.administrator.positionalert.option.Globle;
 
 import java.util.HashMap;
 import java.util.List;

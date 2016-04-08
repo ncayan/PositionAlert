@@ -1,16 +1,13 @@
 package com.example.administrator.positionalert.tools;
 
-import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.LocationManager;
-import android.support.v4.app.ActivityCompat;
 
-import com.example.administrator.positionalert.MyApplication;
+import com.example.administrator.positionalert.option.MyApplication;
 import com.example.administrator.positionalert.model.AlertItem;
-import com.example.administrator.positionalert.model.Globle;
+import com.example.administrator.positionalert.option.Globle;
 
 import java.util.HashMap;
 import java.util.Map;
