@@ -39,7 +39,7 @@ public class AlertAdapter extends ArrayAdapter<AlertItem> {
         Button delete = (Button)view.findViewById(R.id.alert_item_delete);
 
         itemName.setText(alertItem.getName());
-        itemRange.setText(""+alertItem.getRange());
+        itemRange.setText("监听半径: "+alertItem.getRange()+" 米");
         on.setChecked(alertItem.isOn());
         on.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

@@ -190,21 +190,11 @@ public class alertLocationService extends Service {
         String id = alertItem.getId();
         int intId = Integer.parseInt(id);
         Intent intent = new Intent(Globle.ALERT_RECIVER);
-        intent.putExtra("alertId",id);
+        //intent.putExtra("alertId",id);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(alertLocationService.this, intId, intent, 0);
-        if (ActivityCompat.checkSelfPermission(alertLocationService.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        locationManager.addProximityAlert(alertItem.getLatitude(), alertItem.getLongitude(), (float) alertItem.getRange(), -1, pendingIntent);
-        Ring.put(id, pendingIntent);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1000, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        locationManager.addProximityAlert(alertItem.getLatitude(), alertItem.getLongitude(), 100f, -1, pendingIntent);
+        //Ring.put(id, pendingIntent);
     }
 
     public static void removeProximityAlertById(String id) {
@@ -231,7 +221,4 @@ public class alertLocationService extends Service {
             addProximityAlert(alertItem);
         }
     }
-
-
-
 }
