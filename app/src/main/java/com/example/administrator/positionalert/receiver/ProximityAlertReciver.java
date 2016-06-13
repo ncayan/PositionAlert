@@ -18,6 +18,8 @@ import com.example.administrator.positionalert.ui.MainActivity;
 
 import java.io.IOException;
 
+import static android.support.v4.app.ActivityCompat.startActivity;
+
 /**
  * Created by Administrator on 2016/4/1.
  */
@@ -28,14 +30,13 @@ public class ProximityAlertReciver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String key = LocationManager.KEY_PROXIMITY_ENTERING;
         zd();
+        Log.d("OUT", "AlertReceived !:");
         /*try {
             startAlarm();
         } catch (IOException e) {
             e.printStackTrace();
         }*/
         String alertId = intent.getStringExtra("alertId");
-        Intent intent1 = new Intent(MyApplication.getContext(),AlertPenal.class);
-        MyApplication.getContext().startActivity(intent1);
         if(!intent.getBooleanExtra(key,false)){
             return;
         }

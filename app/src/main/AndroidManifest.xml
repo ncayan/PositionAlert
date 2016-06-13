@@ -3,6 +3,7 @@
     package="com.example.administrator.positionalert">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <application
         android:name=".option.MyApplication"
         android:allowBackup="true"

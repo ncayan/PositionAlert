@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
-                Intent intent=new Intent(MainActivity.this,alertLocationService.class);
+                Intent intent = new Intent(MainActivity.this, alertLocationService.class);
                 startService(intent);
 
                 bindService(intent, connection, BIND_AUTO_CREATE);
@@ -125,17 +125,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
-                if (!isServiceWork(Globle.ALERT_SERVICE_NAME)){
-                    Toast.makeText(MainActivity.this,"闹铃监控服务未开启",Toast.LENGTH_SHORT).show();
+                if (!isServiceWork(Globle.ALERT_SERVICE_NAME)) {
+                    Toast.makeText(MainActivity.this, "闹铃监控服务未开启", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Intent intent=new Intent(MainActivity.this,alertLocationService.class);
+                Intent intent = new Intent(MainActivity.this, alertLocationService.class);
                 unbindService(connection);
                 stopService(intent);
 
             }
         });
 
+        stopMonitor.attachToListView(alertList);
         getCurrentPosition();
     }
 

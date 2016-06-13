@@ -34,7 +34,27 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/alert_item_switch"
+                android:layout_gravity="right"
+                android:layout_weight="4" />
 
+            <Button
+                android:text="x"
+                android:id="@+id/alert_item_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+<<<<<<< HEAD
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="38dp"
@@ -48,6 +68,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
     </LinearLayout>
+=======
+    </RelativeLayout>
+>>>>>>> refs/remotes/origin/master
 
 
 
