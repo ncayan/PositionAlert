@@ -58,6 +58,7 @@ public class AlertAdapter extends ArrayAdapter<AlertItem> {
             @Override
             public void onClick(View v) {
                 AlertItem.deleteItem(alertItem);
+                AlertItem.refreshRing();
             }
         });
         return view;

@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         //闹铃类 刷新闹铃集合
         AlertItem.refreshRing();
         //重新初始化闹铃ListView
-        alertListInit();
+        //alertListInit();
 
         textView=(TextView)findViewById(R.id.hellow);
 
@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        alertListInit();
         alertAdapter.notifyDataSetChanged();
     }
 
